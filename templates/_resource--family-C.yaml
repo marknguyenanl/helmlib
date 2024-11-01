@@ -1,0 +1,1 @@
+{{ template "resource--family-Cv1" (list . "resource--family-C")}}
