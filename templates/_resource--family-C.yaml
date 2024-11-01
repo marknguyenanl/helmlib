@@ -1,1 +1,1 @@
-{{ include "helm-lib.resource--family-Cv1" (list . "helm-lib.resource--family-C")}}
+{{ include "helmlib.resourceCv1" (list . "helmlib.resourceC")}}

@@ -1,4 +1,4 @@
-{{ define "helm-lib.resource--family-C" }} 
+{{ define "helmlib.resourceC" }} 
 {{ $cpu:= $.Values.baseunit }}
 {{ $cfamily:= index $.Values.overlay.familyres 0 }}
 resources:
@@ -10,7 +10,7 @@ resources:
       memory: {{ mul $cpu $cfamily.limitreqratio $cfamily.memcpuratio }}Mi
 {{  end }}
 
-{{  define "helm-lib.resource--family-M" }}
+{{  define "helmlib.resourceM" }}
 {{ $cpu:= $.Values.baseunit }}
 {{ $mfamily:= index $.Values.overlay.familyres 1 }}
 resources:
@@ -22,7 +22,7 @@ resources:
       memory: {{ mul $cpu $mfamily.limitreqratio $mfamily.memcpuratio }}Mi
 {{ end }}
 
-{{  define "helm-lib.resource--family-G" }}
+{{  define "helmlib.resourceG" }}
 {{ $cpu:= $.Values.baseunit }}
 {{ $mfamily:= index $.Values.overlay.familyres 2 }}
 resources:
@@ -34,7 +34,7 @@ resources:
       memory: {{ mul $cpu $mfamily.limitreqratio $mfamily.memcpuratio }}Mi
 {{ end }}
 
-{{  define "helm-lib.resource--family-B" }}
+{{  define "helmlib.resourceB" }}
 {{ $cpu:= $.Values.baseunit }}
 {{ $mfamily:= index $.Values.overlay.familyres 3 }}
 resources:
