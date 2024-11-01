@@ -1,0 +1,9 @@
+{{ - define "resource--grade-A" -}}
+resources:
+  - request:
+      cpu: "100m"
+      memory: "100Mi"
+    limit:
+      cpu: "100m"
+      memory: "300Mi"
+{{ - end -}}
