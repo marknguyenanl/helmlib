@@ -1,4 +1,4 @@
-{{  define "lib.common.header.argocd.application" }}
+{{ define "lib.common.header.argocd.application" }}
 apiVersion: v1
 kind: Application
 {{  end }}
