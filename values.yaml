@@ -1,16 +1,16 @@
 overlay:
   baseunit: 100
   familyres:
-    - family: C
+    - name: C
       memcpuratio: 1.5
       limitreqratio: 1.2
-    - family: M
+    - name: M
       memcpuratio: 1.5
       limitreqratio: 1.2
-    - family: G
+    - name: G
       memcpuratio: 1
       limitreqratio: 1.1
-    - family: B
+    - name: B
       memcpuratio: 1
       limitreqratio: 2
   vmachines:

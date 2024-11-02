@@ -1,1 +1,0 @@
-{{ include "helmlib.resourceCv1" (list . "helmlib.resourceC")}}
