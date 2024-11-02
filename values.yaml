@@ -1,5 +1,7 @@
 overlay:
-  baseunit: 100
+  baseunit:
+    cpu: 100
+    mem: 128
   familyres:
     - name: C
       memcpuratio: 1.5
