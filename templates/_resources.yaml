@@ -1,8 +1,9 @@
 {{ define "helmlib.v5machine" }}
-  requests:
-    cpu: 100m
-    memory: 512Mi
-  limits:
-    cpu: 400m
-    memory: 2048Mi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 400m
+      memory: 2048Mi
 {{ end }}
