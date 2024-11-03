@@ -1,4 +1,4 @@
-{{ define "v5machine" }}
+{{ define "helmlib.v5machine" }}
   requests:
     cpu: 100m
     memory: 512Mi
