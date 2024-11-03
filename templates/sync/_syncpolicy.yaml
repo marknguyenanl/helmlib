@@ -1,0 +1,10 @@
+{{ define "helmlib.syncpolicy" }}
+syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+    - ApplyOutOfSyncOnly=true
+  automated:
+    prune: true
+    selfHeal: true
+{{ end }}
