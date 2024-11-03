@@ -1,20 +1,5 @@
 overlay:
-  baseunit:
-    cpu: 100
-    mem: 128
-  familyres:
-    - name: C
-      memcpuratio: 1.5
-      limitreqratio: 1.2
-    - name: M
-      memcpuratio: 1.5
-      limitreqratio: 1.2
-    - name: G
-      memcpuratio: 1
-      limitreqratio: 1.1
-    - name: B
-      memcpuratio: 1
-      limitreqratio: 2
+  baseunit: 100
   vmachines:
     v1: 1
     v2: 2
