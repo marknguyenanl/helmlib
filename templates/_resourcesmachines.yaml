@@ -1,3 +1,3 @@
 {{ define "helmlib.v1machine" }}
-{{ include "helmlib.vmachine" . (dict "memcpuratio" 1 "limitrequestratio" 2) }}
+{{ include "helmlib.vmachine" (dict "memcpuratio" 1 "limitrequestratio" 2) }}
 {{ end }}
