@@ -1,9 +1,9 @@
 {{ define "helmlib.vmachine" }}
 resources:
   requests:
-    cpu: 100m
-    memory: {{ mul 128 .memcpuratio }}Mi
+    cpu: {{ .Values.base.cpu }}m
+    memory: {{ mul .Values.base.memory .memcpuratio }}Mi
   limits:
-    cpu: {{ mul 100 .limitrequestratio }}m
-    memory: {{ mul 128 .memcpuratio .limitrequestratio }}Mi
+    cpu: {{ mul .Values.base.cpu .limitrequestratio }}m
+    memory: {{ mul .Values.base.memory .memcpuratio .limitrequestratio }}Mi
 {{ end }}
