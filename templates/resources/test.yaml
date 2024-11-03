@@ -1,4 +1,4 @@
-{{  define "v5machine" }}
+{{ - define "v5machine" - }}
 resources:
   requests:
     cpu: 100m
@@ -6,4 +6,4 @@ resources:
   limits:
     cpu: 400m
     memory: 2048Mi
-{{ end }}
+{{ - end - }}
