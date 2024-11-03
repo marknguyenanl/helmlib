@@ -1,4 +1,4 @@
-{{  define "helmlib.Cfamily" }}
+{{  define "Cfamily" }}
 resources:
   - requests:
       cpu: {{ $.Values.overlay.baseunit.cpu }}m
