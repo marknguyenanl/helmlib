@@ -18,26 +18,46 @@
 {{/*     memory: {{ mul .Values.xfamily.memory .memcpuratio .limitrequestratio }}Mi */}}
 {{/* {{ end }} */}}
 
-{{ define "helmlib.family" }}
-{{ range $family:= .Values.families }}
-{{ if eq $family.name .familyname }}
-resources:
-  requests:
-    cpu: {{ $family.cpu }}m
-    memory: {{ mul $family.memory .memcpuratio }}Mi
-  limits:
-    cpu: {{ mul $family.cpu .limitrequestratio }}m
-    memory: {{ mul $family.memory .memcpuratio .limitrequestratio }}Mi
-{{ end }}
-{{ end }}
-{{ end }}
+{{/* {{ define "helmlib.family" }} */}}
+{{/* {{ range $family:= .Values.families }} */}}
+{{/* {{ if eq $family.name .familyname }} */}}
+{{/* resources: */}}
+{{/*   requests: */}}
+{{/*     cpu: {{ $family.cpu }}m */}}
+{{/*     memory: {{ mul $family.memory .memcpuratio }}Mi */}}
+{{/*   limits: */}}
+{{/*     cpu: {{ mul $family.cpu .limitrequestratio }}m */}}
+{{/*     memory: {{ mul $family.memory .memcpuratio .limitrequestratio }}Mi */}}
+{{/* {{ end }} */}}
+{{/* {{ end }} */}}
+{{/* {{ end }} */}}
+
+{{/* {{ define "helmlib.machine" }} */}}
+{{/* {{ range $machine:= .Values.machines }} */}}
+{{/* {{ if eq $machine.name .machinename }} */}}
+{{/* {{ $memcpuratio:= $machine.memcpuratio }} */}}
+{{/* {{ $limitrequestratio:= $machine.limitrequestratio }} */}}
+{{/* {{ include "helmlib.family" (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }} */}}
+{{/* {{ end }} */}}
+{{/* {{ end }} */}}
+{{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
+{{ range $family:= .Values.families }}
+{{ if eq $family.name .familyname }}
 {{ range $machine:= .Values.machines }}
 {{ if eq $machine.name .machinename }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
-{{ include "helmlib.family" (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
+resources:
+  requests:
+    cpu: {{ $family.cpu }}m
+    memory: {{ mul $family.memory $memcpuratio }}Mi
+  limits:
+    cpu: {{ mul $family.cpu $limitrequestratio }}m
+    memory: {{ mul $family.memory $memcpuratio $limitrequestratio }}Mi
+{{ end }}
+{{ end }}
 {{ end }}
 {{ end }}
 {{ end }}
