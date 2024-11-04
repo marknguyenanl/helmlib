@@ -18,3 +18,6 @@ resources:
     memory: {{ mul .Values.families.xfamily.memory .memcpuratio .limitrequestratio }}Mi
 {{ end }}
 
+{{ define "helmlib.vm1l1" }}
+{{ include "helmlib.families.vfamily" (dict "memcpuratio" .Values.machines.vm1l1.memcpuratio "limitrequestratio" .Values.machines.vm1l1.limitrequestratio) }}
+{{ end }}
