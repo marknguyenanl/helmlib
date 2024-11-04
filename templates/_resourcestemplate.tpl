@@ -42,28 +42,25 @@
 {{/* {{ end }} */}}
 {{/* {{ end }} */}}
 
-{{ define "helmlib.machine.template" }}
-{{- $families := default (dict) $.Values.families -}}
-{{- $machines := default (dict) $.Values.machines -}}
-{{ if $families }}
-  {{ range $family := $families }}
-    {{ if eq $family.name .familyname }}
-      {{ if $machines }}
-        {{ range $machine := $machines }}
-          {{ if eq $machine.name .machinename }}
-            {{ $memcpuratio := $machine.memcpuratio }}
-            {{ $limitrequestratio := $machine.limitrequestratio }}
-            resources:
-              requests:
-                cpu: {{ $family.cpu }}m
-                memory: {{ mul $family.memory $memcpuratio }}Mi
-              limits:
-                cpu: {{ mul $family.cpu $limitrequestratio }}m
-                memory: {{ mul $family.memory $memcpuratio $limitrequestratio }}Mi
-          {{ end }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ end }}
+{{- define "helmlib.machine.template" -}}
+{{- $family := .Values.helmlib.families -}}
+{{- if $family -}}
+{{- range $family -}}
+{{- if eq $family.name .familyname -}}
+{{- $machine := .Values.helmlib.machines -}}
+{{- range $machine -}}
+{{- if eq $machine.name .machinename -}}
+{{- $memcpuratio := $machine.memcpuratio -}}
+{{- $limitrequestratio := $machine.limitrequestratio -}}
+resources:
+requests:
+  cpu: {{ $family.cpu }}m
+  memory: {{ mul $family.memory $memcpuratio }}Mi
+limits:
+  cpu: {{ mul $family.cpu $limitrequestratio }}m
+  memory: {{ mul $family.memory $memcpuratio $limitrequestratio }}Mi
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

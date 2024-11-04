@@ -1,15 +1,16 @@
-families:
-  - name: vfamily
-    cpu: 100
-    memory: 128
-  - name: xfamily
-    cpu: 100
-    memory: 128
+helmlib:
+  families:
+    - name: vfamily
+      cpu: 100
+      memory: 128
+    - name: xfamily
+      cpu: 100
+      memory: 128
 
-machines:
-  - name: vm1l1
-    memcpuratio: 1
-    limitrequestratio: 1
-  - name: xm1l1
-    memcpuratio: 1
-    limitrequestratio: 1
+  machines:
+    - name: vm1l1
+      memcpuratio: 1
+      limitrequestratio: 1
+    - name: xm1l1
+      memcpuratio: 1
+      limitrequestratio: 1
