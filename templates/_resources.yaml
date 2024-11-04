@@ -1,3 +1,0 @@
-{{ define "helmlib.machine" }}
-{{ include "helmlib.machine.template" . }}
-{{ end }}
