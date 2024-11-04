@@ -1,29 +1,20 @@
-{{ define "helmlib.vmachine" }}
+{{ define "helmlib.vfamily" }}
 resources:
   requests:
-    cpu: {{ .Values.vmachine.cpu }}m
-    memory: {{ mul .Values.vmachine.memory .memcpuratio }}Mi
+    cpu: {{ .Values.vfamily.cpu }}m
+    memory: {{ mul .Values.vfamily.memory .memcpuratio }}Mi
   limits:
-    cpu: {{ mul .Values.vmachine.cpu .limitrequestratio }}m
-    memory: {{ mul .Values.vmachine.memory .memcpuratio .limitrequestratio }}Mi
+    cpu: {{ mul .Values.vfamily.cpu .limitrequestratio }}m
+    memory: {{ mul .Values.vfamily.memory .memcpuratio .limitrequestratio }}Mi
 {{ end }}
 
-{{ define "helmlib.xmachine" }}
+{{ define "helmlib.xfamily" }}
 resources:
   requests:
-    cpu: {{ mul .Values.xmachine.cpu .}}m
-    memory: {{ mul .Values.xmachine.memory .memcpuratio }}Mi
+    cpu: {{ mul .Values.xfamily.cpu .}}m
+    memory: {{ mul .Values.xfamily.memory .memcpuratio }}Mi
   limits:
-    cpu: {{ mul .Values.xmachine.cpu .limitrequestratio }}m
-    memory: {{ mul .Values.xmachine.memory .memcpuratio .limitrequestratio }}Mi
+    cpu: {{ mul .Values.xfamily.cpu .limitrequestratio }}m
+    memory: {{ mul .Values.xfamily.memory .memcpuratio .limitrequestratio }}Mi
 {{ end }}
 
-{{ range $machine:= $.Values.machines }}
-{{ $libmachine:= cat "helmlib." $machine }}
-{{ $memcpuratio:= $machine.memcpuratio }}
-{{ $limitrequestratio:= $machine.limitrequestratio }}
-{{ $libdict:= dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio }}
-{{ printf "define %s" $libmachine }}
-{{ include $libmachine $libdict | indent 2}}
-{{ printf "end" }}
-{{ end }}
