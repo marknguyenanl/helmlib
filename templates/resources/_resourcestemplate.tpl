@@ -43,13 +43,14 @@
 {{/* {{ end }} */}}
 
 {{- define "helmlib.machine.template" -}}
+{{- $root := . -}}
 {{- $family := $.Values.helmlib.families -}}
 {{- if $family -}}
 {{- range $family -}}
-{{- if eq $family.name .familyname -}}
+{{- if eq $family.name $root.familyname -}}
 {{- $machine := $.Values.helmlib.machines -}}
 {{- range $machine -}}
-{{- if eq $machine.name .machinename -}}
+{{- if eq $machine.name $root.machinename -}}
 {{- $memcpuratio := $machine.memcpuratio -}}
 {{- $limitrequestratio := $machine.limitrequestratio -}}
 resources:
