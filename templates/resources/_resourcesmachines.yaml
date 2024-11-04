@@ -1,3 +1,34 @@
-{{ define "helmlib.v1machine" }}
-{{ include "helmlib.vmachine" (dict "memcpuratio" 1 "limitrequestratio" 2) }}
+{{ range $machine:= $.Values.machines }}
+{{ $libmachine:= cat $.Chart.Name $machine }}
+{{ $libdict:= (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
+{{ printf "define .%s" $libmachine }}
+{{ $memcpuratio:= $machine.memcpuratio }}
+{{ $limitrequestratio:= $machine.limitrequestratio }}
+{{ printf "include %s %s" $libmachine $libdict }}
+{{ printf "end" }}
 {{ end }}
+
+{{/**/}}
+{{/* {{ define "helmlib.v12" }} */}}
+{{/* {{ include "helmlib.vmachine" (dict "memcpuratio" .Values.memcpuratio.v12 "limitrequestratio" .Values.limitrequestratio.v12 ) }} */}}
+{{/* {{ end }} */}}
+{{/**/}}
+{{/* {{ define "helmlib.v3" }} */}}
+{{/* {{ include "helmlib.vmachine" (dict "memcpuratio" .Values.memcpuratio.v3 "limitrequestratio" .Values.limitrequestratio.v3 ) }} */}}
+{{/* {{ end }} */}}
+{{/**/}}
+{{/* {{ define "helmlib.v5" }} */}}
+{{/* {{ include "helmlib.vmachine" (dict "memcpuratio" .Values.memcpuratio.v5 "limitrequestratio" .Values.limitrequestratio.v5 ) }} */}}
+{{/* {{ end }} */}}
+{{/**/}}
+{{/* {{ define "helmlib.x1" }} */}}
+{{/* {{ include "helmlib.xmachine" (dict "memcpuratio" .Values.memcpuratio.x1 "limitrequestratio" .Values.limitrequestratio.x1 ) }} */}}
+{{/* {{ end }} */}}
+{{/**/}}
+{{/* {{ define "helmlib.x3" }} */}}
+{{/* {{ include "helmlib.xmachine" (dict "memcpuratio" .Values.memcpuratio.x3 "limitrequestratio" .Values.limitrequestratio.x3 ) }} */}}
+{{/* {{ end }} */}}
+{{/**/}}
+{{/* {{ define "helmlib.x5" }} */}}
+{{/* {{ include "helmlib.xmachine" (dict "memcpuratio" .Values.memcpuratio.x5 "limitrequestratio" .Values.limitrequestratio.x5 ) }} */}}
+{{/* {{ end }} */}}
