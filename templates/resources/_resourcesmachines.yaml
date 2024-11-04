@@ -1,10 +1,10 @@
 {{ range $machine:= $.Values.machines }}
 {{ $libmachine:= cat "helmlib." $machine }}
-{{ $libdict:= (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
-{{ printf "define %s" $libmachine }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
-{{ printf "include %s %s" $libmachine $libdict }}
+{{ $libdict:= (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
+{{ printf "define %s" $libmachine }}
+{{ printf "include %s %s" $libmachine $libdict | indent 2}}
 {{ printf "end" }}
 {{ end }}
 
