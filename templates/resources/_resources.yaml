@@ -6,7 +6,7 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
-{{ $root = . }}
+{{ $root := . }}
 {{ range $family := .Values.global.families }}
 {{ if eq $family.name .usefamily }}
 {{ range $machine := $root.Values.global.machines }}
