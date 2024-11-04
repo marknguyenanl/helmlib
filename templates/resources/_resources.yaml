@@ -6,8 +6,8 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
-{{ $machine := $.Values.global.machines }}
-{{ if contains $machine.name .name}}
+{{ $machine := .Values.global.machines }}
+{{ if eq $machine.name "vm1l1"}}
 {{ $reqmem := mul $machine.reqcpu 1.28}}
 resources:
   requests:
