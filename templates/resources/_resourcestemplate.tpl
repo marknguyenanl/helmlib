@@ -44,11 +44,10 @@
 
 {{- define "helmlib.machine.template" -}}
 {{- $root := . -}}
-{{- if $.Values.helmlib.families -}}
-{{- $family := $.Values.helmlib.families -}}
+{{- $family := $root.Values.helmlib.families -}}
+{{- $machine := $root.Values.helmlib.machines -}}
 {{- range $family -}}
 {{- if eq $family.name $root.familyname -}}
-{{- $machine := $.Values.helmlib.machines -}}
 {{- range $machine -}}
 {{- if eq $machine.name $root.machinename -}}
 {{- $memcpuratio := $machine.memcpuratio -}}
@@ -60,7 +59,6 @@ requests:
 limits:
   cpu: {{ mul $family.cpu $limitrequestratio }}m
   memory: {{ mul $family.memory $memcpuratio $limitrequestratio }}Mi
-{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
