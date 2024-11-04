@@ -1,10 +1,10 @@
 {{ define "helmlib.families.vfamily" }}
 resources:
   requests:
-    cpu: {{ (((.Values.families).vfamily).cpu) }}m
-    memory: {{ mul (((.Values.families).vfamily).memory) 1 }}Mi
+    cpu: {{ ((.Values.families).vfamily).cpu }}m
+    memory: {{ mul ((.Values.families).vfamily).memory 1 }}Mi
   limits:
-    cpu: {{ mul (((.Values.families).vfamily).cpu) .limitrequestratio }}m
+    cpu: {{ mul ((.Values.families).vfamily).cpu 1 }}m
     memory: {{ mul (((.Values.families).vfamily).memory) 1 1 }}Mi
 {{ end }}
 
