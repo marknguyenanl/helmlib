@@ -1,0 +1,3 @@
+{{- define "helmlib.vm1l1" -}}
+{{- include "helmlib.families.vfamily" (dict "memcpuratio" .Values.machines.vm1l1.memcpuratio "limitrequestratio" .Values.machines.vm1l1.limitrequestratio) | indent 2 -}}
+{{- end -}}
