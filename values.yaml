@@ -1,9 +1,10 @@
-vfamily:
-  cpu: 100
-  memory: 128
-xfamily:
-  cpu: 100
-  memory: 128
+families:
+  - name: vfamily
+    cpu: 100
+    memory: 128
+  - name: xfamily
+    cpu: 100
+    memory: 128
 
 machines:
   - name: vm1l1
