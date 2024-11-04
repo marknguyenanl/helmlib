@@ -19,7 +19,7 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.family" }}
-{{ range $family:= $.Values.families }}
+{{ range $family:= .Values.families }}
 {{ if eq $family.name .familyname }}
 resources:
   requests:
@@ -33,7 +33,7 @@ resources:
 {{ end }}
 
 {{ define "helmlib.machine" }}
-{{ range $machine:= $.Values.machines }}
+{{ range $machine:= .Values.machines }}
 {{ if eq $machine.name .machinename }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
