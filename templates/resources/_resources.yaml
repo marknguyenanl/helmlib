@@ -6,15 +6,16 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
-{{ $machine := .Values.global.machines }}
-{{ if eq $machine.name "vm1l1"}}
-{{ $reqmem := mul $machine.reqcpu 1.28}}
+{{ with .Values.global.machines }}
+{{ if eq .name "vm1l1"}}
+{{ $reqmem := mul .cpu 1.28}}
 resources:
   requests:
-    cpu: {{ $machine.reqcpu }}m
-    memory: {{ mul $machine.reqmem $machine.memtocpu }}Mi
+    cpu: {{ .cpu }}m
+    memory: {{ mul $reqmem .memtocpu }}Mi
   limits:
-    cpu: {{ mul $machine.reqcpu $machine.limittoreq }}m
-    memory: {{ mul $machine.reqmem $machine.memtocpu $machine.limittoreq }}Mi
+    cpu: {{ mul .reqcpu .limittoreq }}m
+    memory: {{ mul $reqmem .memtocpu .limittoreq }}Mi
+{{ end }}
 {{ end }}
 {{ end }}
