@@ -6,7 +6,6 @@ helmlib:
     - name: xfamily
       cpu: 100
       memory: 128
-
   machines:
     - name: vm1l1
       memcpuratio: 1

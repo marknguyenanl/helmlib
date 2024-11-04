@@ -44,8 +44,8 @@
 
 {{- define "helmlib.machine.template" -}}
 {{- $root := . -}}
+{{- if $.Values.helmlib.families -}}
 {{- $family := $.Values.helmlib.families -}}
-{{- if $family -}}
 {{- range $family -}}
 {{- if eq $family.name $root.familyname -}}
 {{- $machine := $.Values.helmlib.machines -}}
