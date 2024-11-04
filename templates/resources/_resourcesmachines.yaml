@@ -1,7 +1,10 @@
 {{ define "helmlib.machine" }}
-{{ if eq .Values.machines.name .familyname }}
-{{ $memcpuratio:= .Values.machines.memcpuratio }}
-{{ $limitrequestratio:= .Values.machines.limitrequestratio }}
+{{ range $machine:= $.Values.machines }}
+---
+{{ if eq $.Values.machines.name .familyname }}
+{{ $memcpuratio:= $.Values.machines.memcpuratio }}
+{{ $limitrequestratio:= $.Values.machines.limitrequestratio }}
 {{ include (cat "helmlib." .familyname) (dict "memcpuratio" $memcpuratio "limitrequestratio" $limitrequestratio) }}
+{{ end }}
 {{ end }}
 {{ end }}
