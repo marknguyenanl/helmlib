@@ -1,6 +1,5 @@
 {{ define "helmlib.families.vfamily" }}
-{{- with .Values.families.vfamily }}
-  {{- printf "vfamily: %v" . | indent 2 }}
+{{- with .Values.vfamily }}
   resources:
     requests:
       cpu: {{ .cpu }}m

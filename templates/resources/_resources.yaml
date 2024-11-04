@@ -1,3 +1,3 @@
 {{ define "helmlib.machines.vm1l1" }}
-{{ include "helmlib.families.vfamily" . }}
+{{ template "helmlib.families.vfamily" . }}
 {{ end }}

@@ -1,15 +1,13 @@
-families:
-  vfamily:
-    cpu: 100
-    memory: 128
-  xfamily:
-    cpu: 100
-    memory: 128
+vfamily:
+  cpu: 100
+  memory: 128
+xfamily:
+  cpu: 100
+  memory: 128
 
-machines:
-  vm1l1:
-    memcpuratio: 1
-    limitrequestratio: 1
-  xm1l1:
-    memcpuratio: 1
-    limitrequestratio: 1
+vm1l1:
+  memcpuratio: 1
+  limitrequestratio: 1
+xm1l1:
+  memcpuratio: 1
+  limitrequestratio: 1
