@@ -1,11 +1,11 @@
 {{ define "helmlib.families.vfamily" }}
 resources:
   requests:
-    cpu: {{ ((.Values.families).vfamily).cpu }}m
-    memory: {{ mul ((.Values.families).vfamily).memory 1 }}Mi
+    cpu: {{ printf "%sm" ((.Values.families).vfamily).cpu }}
+    memory: {{ printf "%sMi" (mul ((.Values.families).vfamily).memory 1) }}
   limits:
-    cpu: {{ mul ((.Values.families).vfamily).cpu 1 }}m
-    memory: {{ mul ((.Values.families).vfamily).memory 1 1 }}Mi
+    cpu: {{ printf "%sm" (mul ((.Values.families).vfamily).cpu 1) }}
+    memory: {{ printf "%sMi" (mul ((.Values.families).vfamily).memory 1 1) }}
 {{ end }}
 
 {{/* {{ define "helmlib.families.xfamily" }} */}}
