@@ -1,9 +1,5 @@
-vfamily:
-  cpu: 100
-  memory: 128
-xfamily:
-  cpu: 100
-  memory: 128
+basecpu: 100
+basememory: 128
 
 vm1l1:
   memcpuratio: 1
