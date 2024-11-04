@@ -1,9 +1,9 @@
 {{ define "helmlib.bmachines" }}
   resources:
     requests:
-      cpu: {{ .Values.cpu }}m
-      memory: {{ mul .Values.memory 1 }}Mi
+      cpu: {{ .Values.basecpu }}m
+      memory: {{ mul .Values.basememory 1 }}Mi
     limits:
-      cpu: {{ mul .Values.cpu 1 }}m
-      memory: {{ mul .Values.memory 1 1 }}Mi
+      cpu: {{ mul .Values.basecpu 1 }}m
+      memory: {{ mul .Values.basememory 1 1 }}Mi
 {{ end }}
