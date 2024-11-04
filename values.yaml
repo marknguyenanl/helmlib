@@ -1,8 +1,8 @@
 families:
-  - name: vfamily
+  vfamily:
     cpu: 100
     memory: 128
-  - name: xfamily
+  xfamily:
     cpu: 100
     memory: 128
 
