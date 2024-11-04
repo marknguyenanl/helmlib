@@ -43,7 +43,7 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine.template" }}
-{{ range $family:= .Values.families }}
+{{ range $index, $family:= .Values.families }}
 {{ if eq $family.name .familyname }}
 {{ range $machine:= .Values.machines }}
 {{ if eq $machine.name .machinename }}
