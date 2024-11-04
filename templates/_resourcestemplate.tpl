@@ -43,11 +43,11 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine.template" }}
-{{ if .Values.families }}
-{{ range $family:= .Values.families }}
+{{ if $.Values.families }}
+{{ range $family:= $.Values.families }}
 {{ if eq $family.name .familyname }}
-{{ if .Values.machines }}
-{{ range $machine:= .Values.machines }}
+{{ if $.Values.machines }}
+{{ range $machine:= $.Values.machines }}
 {{ if eq $machine.name .machinename }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
