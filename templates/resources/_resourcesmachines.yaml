@@ -1,7 +1,7 @@
 {{ range $machine:= $.Values.machines }}
-{{ $libmachine:= cat $.Chart.Name $machine }}
+{{ $libmachine:= cat "helmlib." $machine }}
 {{ $libdict:= (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
-{{ printf "define .%s" $libmachine }}
+{{ printf "define %s" $libmachine }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
 {{ printf "include %s %s" $libmachine $libdict }}
