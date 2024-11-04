@@ -42,7 +42,7 @@
 {{/* {{ end }} */}}
 {{/* {{ end }} */}}
 
-{{ define "helmlib.machine" }}
+{{ define "helmlib.machine.template" }}
 {{ range $family:= .Values.families }}
 {{ if eq $family.name .familyname }}
 {{ range $machine:= .Values.machines }}
