@@ -6,9 +6,10 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
-{{ range $family := $.Values.global.families }}
+{{ $root = . }}
+{{ range $family := .Values.global.families }}
 {{ if eq $family.name .usefamily }}
-{{ range $machine := $.Values.global.machines }}
+{{ range $machine := $root.Values.global.machines }}
 {{ if eq $machine.name .usemachine }}
 resources:
   requests:
