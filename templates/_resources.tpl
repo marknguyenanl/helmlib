@@ -37,7 +37,7 @@ resources:
 {{ if eq $machine.name .machinename }}
 {{ $memcpuratio:= $machine.memcpuratio }}
 {{ $limitrequestratio:= $machine.limitrequestratio }}
-{{ include "helmlib.family" . }}
+{{ include "helmlib.family" (dict "memcpuratio" $machine.memcpuratio "limitrequestratio" $machine.limitrequestratio) }}
 {{ end }}
 {{ end }}
 {{ end }}
