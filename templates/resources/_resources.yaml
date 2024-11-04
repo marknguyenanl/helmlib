@@ -1,17 +1,15 @@
-{{ define "helmlib.usefamily"}}
-{{ .Value.overlay.usefamily }}
-{{ end }}
-{{ define "helmlib.usemachine"}}
-{{ .Value.overlay.usemachine }}
-{{ end }}
+{{/* {{ define "helmlib.usefamily"}} */}}
+{{/* {{ .Value.overlay.usefamily }} */}}
+{{/* {{ end }} */}}
+{{/* {{ define "helmlib.usemachine"}} */}}
+{{/* {{ .Value.overlay.usemachine }} */}}
+{{/* {{ end }} */}}
 
 {{ define "helmlib.machine" }}
-{{ $usefamily := include "helmlib.usefamily" .}}
-{{ $usemachine := include "helmlib.usemachine" .}}
 {{ range $family := $.Values.global.families }}
-{{ if eq $family.name $usefamily }}
+{{ if eq $family.name (tpl .Values.overlay.usefamily) }}
 {{ range $machine := $.Values.global.machines }}
-{{ if eq $machine.name $usemachine }}
+{{ if eq $machine.name (tpl .Values.overlay.usemachine) }}
 resources:
   requests:
     cpu: {{ $family.cpu }}m
