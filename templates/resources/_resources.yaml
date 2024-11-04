@@ -1,9 +1,17 @@
-{{ define "helmlib.bmachines" }}
+{{- define "helmlib.machine" -}}
+{{- range $family := $.Values.global.families -}}
+{{- if eq $family $.Values.usefamily -}}
+{{- range $machine := $.Values.global.machines -}}
+{{- if eq $machine $.Values.usemachine -}}
 resources:
   requests:
-    cpu: {{ .Values.basecpu }}m
-    memory: {{ mul .Values.basememory 2 }}Mi
+    cpu: {{ $family.cpu }}m
+    memory: {{ mul $family.memory $machine.memcpu }}Mi
   limits:
-    cpu: {{ mul .Values.basecpu 2 }}m
-    memory: {{ mul .Values.basememory 2 2 }}Mi
-{{ end }}
+    cpu: {{ mul $family.cpu $machine.limitrequest }}m
+    memory: {{ mul $family.memory $machine.memcpu $machine.limitrequest }}Mi
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

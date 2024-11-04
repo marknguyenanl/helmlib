@@ -1,9 +1,0 @@
-basecpu: 100
-basememory: 128
-
-vm1l1:
-  memcpuratio: 1
-  limitrequestratio: 1
-xm1l1:
-  memcpuratio: 1
-  limitrequestratio: 1
