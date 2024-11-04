@@ -1,8 +1,8 @@
 {{ define "helmlib.machine" }}
 {{ range $family := $.Values.global.families }}
-{{ if eq $family.name $.Values.overlay.usefamily }}
+{{ if eq $family.name .usefamily }}
 {{ range $machine := $.Values.global.machines }}
-{{ if eq $machine.name $.Values.overlay.usemachine }}
+{{ if eq $machine.name .usemachine }}
 resources:
   requests:
     cpu: {{ $family.cpu }}m
