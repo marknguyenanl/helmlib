@@ -43,8 +43,10 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machine.template" }}
-{{ range $index, $family:= .Values.families }}
+{{ if .Values.families }}
+{{ range $family:= .Values.families }}
 {{ if eq $family.name .familyname }}
+{{ if .Values.machines }}
 {{ range $machine:= .Values.machines }}
 {{ if eq $machine.name .machinename }}
 {{ $memcpuratio:= $machine.memcpuratio }}
@@ -56,6 +58,8 @@ resources:
   limits:
     cpu: {{ mul $family.cpu $limitrequestratio }}m
     memory: {{ mul $family.memory $memcpuratio $limitrequestratio }}Mi
+{{ end }}
+{{ end }}
 {{ end }}
 {{ end }}
 {{ end }}
