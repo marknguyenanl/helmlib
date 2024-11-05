@@ -1,0 +1,8 @@
+helmlib:
+  machineslist:
+    - name: am1l1
+      cpu: 111m
+      mem: 222Mi
+    - name: bm1l1
+      cpu: 222m
+      mem: 333Mi
