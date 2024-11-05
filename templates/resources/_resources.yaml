@@ -4,7 +4,7 @@
 # passing values of deploy-cnpg to it
 # if condition to check if match then only use one section of the loop
 {{- define "helmlib.machineslist" }} 
-{{- range $machines := (($.Values.helmlib).machineslist) }}
+{{- range $machines := ((.Values.helmlib).machineslist) }}
 {{- if eq $machines.name .mname }}
 resources:
   requests:
