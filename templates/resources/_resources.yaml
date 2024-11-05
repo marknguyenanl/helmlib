@@ -1,30 +1,16 @@
-
-# $.Values.global.machinelist in rr
-# deploy-cnpg include with custom
-# passing values of deploy-cnpg to it
-# if condition to check if match then only use one section of the loop
 {{- define "helmlib.machineslist" }} 
-{{- range $machines := ((.Values.helmlib).machineslist) }}
-{{- if eq $machines.name .mname }}
-resources:
-  requests:
-    cpu: {{ $machines.cpu }}m
-    memory: {{ $machines.mem }}Mi
-  limits:
-    cpu: {{ $machines.cpu }}m
-    memory: {{ $machines.mem }}Mi
+  {{- if .Values.helmlib }}
+    {{- $machineslist := .Values.helmlib.machineslist | default (list) }}
+    {{- range $machines := $machineslist }}
+      {{- if eq $machines.name .mname }}
+        resources:
+          requests:
+            cpu: {{ $machines.cpu }}m
+            memory: {{ $machines.mem }}Mi
+          limits:
+            cpu: {{ $machines.cpu }}m
+            memory: {{ $machines.mem }}Mi
+      {{- end }}
+    {{- end }}
+  {{- end }}
 {{- end }}
-{{- end }}
-{{- end }}
-
-{{/* # Test successfully passing rr values to this */}}
-{{/* {{ define "helmlib.machine.vm1l1" }} */}}
-{{/* {{ $vm1l1 := (((.Values.global).machines).vm1l1) }} */}}
-{{/* resources: */}}
-{{/*   requests: */}}
-{{/*     cpu: {{ $vm1l1.reqcpu }}m */}}
-{{/*     memory: {{ mul $vm1l1.reqcpu $vm1l1.memtocpu }}Mi */}}
-{{/*   limits: */}}
-{{/*     cpu: {{ mul $vm1l1.reqcpu $vm1l1.limittoreq}}m */}}
-{{/*     memory: {{ mul $vm1l1.reqcpu $vm1l1.memtocpu $vm1l1.limittoreq }}Mi */}}
-{{/* {{ end }} */}}
