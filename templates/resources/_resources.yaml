@@ -8,7 +8,7 @@
 {{ define "helmlib.machine" }}
 {{ with .Values.machines }}
 {{ if eq .name "vm1l1"}}
-{{ $reqmem := mul .cpu 1.28}}
+{{ $reqmem := mul .reqcpu 1.28}}
 resources:
   requests:
     cpu: {{ .reqcpu }}m
