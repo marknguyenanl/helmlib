@@ -1,12 +1,9 @@
 {{ define "helmlib.machine.vm1l1" }}
-{{ with .Values.machines.vm1l1 }}
-{{ $reqmem := mul .Values.machines.vm1l1.reqcpu 1.28}}
 resources:
   requests:
-    cpu: {{ .reqcpu }}m
-    memory: {{ mul $reqmem 1 }}Mi
+    cpu: 120m
+    memory: 200Mi
   limits:
-    cpu: {{ mul .reqcpu 1 }}m
-    memory: {{ mul $reqmem 1 1 }}Mi
-{{ end }}
+    cpu: 240m
+    memory: 400Mi
 {{ end }}
