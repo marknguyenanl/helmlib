@@ -11,22 +11,22 @@
 {{/* {{ end }} */}}
 
 {{- define "helmlib.machineused" -}}
-{{- $machinesize := .Values.overlay.machineused.size -}}
-{{- $machineseries := .Values.overlay.machineused.series -}}
-{{- $sizeValue := index .Values.global.machinesize $machinesize -}}
-{{- $series := index .Values.global.machineseries $machineseries -}}
-{{- $cpuToMem := $series.cputomem -}}
-{{- $reqToLimit := $series.reqtolimit -}}
+{{/* {{- $usedsize := ((.Values.overlay).machineused).size -}} */}}
+{{/* {{- $usedseries := ((.Values.overlay).machineused).series -}} */}}
+{{- $capValue := index (.Values.global).machinesize (tpl (((.Values.overlay).machineused).size) .) -}}
+{{- $usedmachine := index (.Values.global).machineseries (tpl (((.Values.overlay).machineused).series) .) -}}
+{{- $cpuToMem := $usedmachine.cputomem -}}
+{{- $reqToLimit := $usedmachine.reqtolimit -}}
 
-{{- $cpu := printf "%dm" $sizeValue -}}
-{{- $memory := printf "%dMi" (mul $sizeValue $cpuToMem) -}}
-{{- $cpuLimit := printf "%dm" (mul $sizeValue (add 1 $reqToLimit)) -}}
-{{- $memoryLimit := printf "%dMi" (mul $sizeValue $cpuToMem (add 1 $reqToLimit)) -}}
+{{- $cpuRequest := printf "%dm" (mul $capValue $cpuToMem $reqToLimit) -}}
+{{- $memoryRequest := printf "%dMi" (mul $capValue $reqToLimit) -}}
+{{- $cpuLimit := printf "%dm" (mul $capValue $cpuToMem) -}}
+{{- $memoryLimit := $capValue -}}
 
 resources:
   requests:
-    cpu: {{ $cpu }}
-    memory: {{ $memory }}
+    cpu: {{ $cpuRequest }}
+    memory: {{ $memoryRequest }}
   limits:
     cpu: {{ $cpuLimit }}
     memory: {{ $memoryLimit }}
