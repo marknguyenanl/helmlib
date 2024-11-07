@@ -11,26 +11,26 @@
 {{/* {{ end }} */}}
 
 {{ define "helmlib.machineused.size"}}
-{{ .Values.overlay.machineused.size }}
+{{ ((.Values.overlay).machineused).size }}
 {{ end }}
 
 {{ define "helmlib.machineused.series"}}
-{{ .Values.overlay.machineused.series }}
+{{ ((.Values.overlay).machineused).series }}
 {{ end }}
 
 {{ define "helmlib.machineseries.size" }}
-{{ index .Values.global.machinesize .Values.overlay.machineused.size }}
+{{ index (.Values.global).machinesize ((.Values.overlay).machineused).size }}
 {{ end }}
 {{ define "helmlib.machineseries.series" }}
-{{ index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ index (.Values.global).machinesize ((.Values.overlay).machineused).series }}
 {{ end }}
 
 {{ define "helmlib.machinesize.cputomem" }}
-{{ $series := index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ $series := index (.Values.global).machinesize ((.Values.overlay).machineused).series }}
 {{ index $series "cputomem" }}
 {{ end }}
 {{ define "helmlib.machinesize.reqtolimit" }}
-{{ $series := index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ $series := index (.Values.global).machinesize ((.Values.overlay).machineused).series }}
 {{ index $series "reqtolimit" }}
 {{ end }}
 
