@@ -13,10 +13,10 @@
 {{- define "helmlib.machineused" -}}
 {{/* {{- $usedsize := ((.Values.overlay).machineused).size -}} */}}
 {{/* {{- $usedseries := ((.Values.overlay).machineused).series -}} */}}
-{{- $capValue := tpl (printf "{{ .Values.global.machinesize.%s }}" ((.Values.overlay).machineused).size) . -}}
-{{/* {{- $usedmachine := tpl (printf ".Values.global.machineseries.%s" ((.Values.overlay).machineused).series) . -}} */}}
-{{- $cpuToMem := tpl (printf "{{ .Values.global.machineseries.%s.cputomem }}" ((.Values.overlay).machineused).series) . -}}
-{{- $reqToLimit := tpl (printf "{{ .Values.global.machineseries.%s.reqtolimit }}" ((.Values.overlay).machineused).series) . -}}
+{{- $capValue := tpl (printf "{{ ((.Values.global).machinesize) }}.%s" ((.Values.overlay).machineused).size) . -}}
+{{/* {{- $usedmachine := tpl (printf "({{ ((.Values.global).machineseries) }}.%s)" ((.Values.overlay).machineused).series) . -}} */}}
+{{- $cpuToMem := tpl (printf "({{ ((.Values.global).machineseries) }}.%s.cputomem)" ((.Values.overlay).machineused).series) . -}}
+{{- $reqToLimit := tpl (printf "({{ ((.Values.global).machineseries) }}.%s.reqToLimit)" ((.Values.overlay).machineused).series) . -}}
 {{/* {{- $cpuToMem := $usedmachine.cputomem -}} */}}
 {{/* {{- $reqToLimit := $usedmachine.reqtolimit -}} */}}
 
