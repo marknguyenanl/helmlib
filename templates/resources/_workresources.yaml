@@ -1,5 +1,5 @@
 {{/* # Test successfully passing rr values to this */}}
-{{/* {{ define "helmlib.machine.vm1l1" }} */}}
+{{/* {{ define "helmlib.machine" }} */}}
 {{/* {{ $vm1l1 := (((.Values.global).machines).vm1l1) }} */}}
 {{/* resources: */}}
 {{/*   requests: */}}
@@ -9,3 +9,62 @@
 {{/*     cpu: {{ mul $vm1l1.reqcpu $vm1l1.limittoreq}}m */}}
 {{/*     memory: {{ mul $vm1l1.reqcpu $vm1l1.memtocpu $vm1l1.limittoreq }}Mi */}}
 {{/* {{ end }} */}}
+
+{{ define "helmlib.machineused.size"}}
+{{ .Values.overlay.machineused.size }}
+{{ end }}
+
+{{ define "helmlib.machineused.series"}}
+{{ .Values.overlay.machineused.series }}
+{{ end }}
+
+{{ define "helmlib.machineseries.size" }}
+{{ index .Values.global.machinesize .Values.overlay.machineused.size }}
+{{ end }}
+{{ define "helmlib.machineseries.series" }}
+{{ index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ end }}
+
+{{ define "helmlib.machinesize.cputomem" }}
+{{ $series := index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ index $series "cputomem" }}
+{{ end }}
+{{ define "helmlib.machinesize.reqtolimit" }}
+{{ $series := index .Values.global.machinesize .Values.overlay.machineused.series }}
+{{ index $series "reqtolimit" }}
+{{ end }}
+
+{{ define "helmlib.machineused.requests.cpu" }}
+{{ $cputomem := include "helmlib.machinesize.cputomem" . }}
+{{ $reqtolimit := include "helmlib.machinesize.reqtolimit" . }}
+{{ $memcap := include "helmlib.machinesize.size" . }}
+{{ $reqcpu := mul $cputomem $reqtolimit $memcap }}
+{{ print "%sm" $reqcpu }}
+{{ end }}
+{{ define "helmlib.machineused.requests.memory" }}
+{{ $reqtolimit := include "helmlib.machinesize.reqtolimit" . }}
+{{ $memcap := include "helmlib.machinesize.size" . }}
+{{ $reqmem := mul $reqtolimit $memcap }}
+{{ print "%sMi" $reqmem }}
+{{ end }}
+{{ define "helmlib.machineused.limits.cpu" }}
+{{ $cputomem := include "helmlib.machinesize.cputomem" . }}
+{{ $memcap := include "helmlib.machinesize.size" . }}
+{{ $limitcpu := mul $cputomem $memcap }}
+{{ print "%sm" $limitcpu }}
+{{ end }}
+{{ define "helmlib.machineused.limits.memory" }}
+{{ $memcap := include "helmlib.machinesize.size" . }}
+{{ print "%sMi" $memcap }}
+{{ end }}
+
+{{ define "helmlib.machineused" }}
+resources:
+  requests:
+    cpu: {{ include "helmlib.machineused.requests.cpu" . }}
+    memory: {{ include "helmlib.mahcineused.requests.memory" . }}
+  limits:
+    cpu: {{ include "helmlib.machineused.limits.cpu" . }}
+    memory: {{ include "helmlib.machineused.limits.memory" . }}
+{{ end }}
+
