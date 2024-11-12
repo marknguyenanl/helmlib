@@ -1,10 +1,11 @@
 {{- define "helmlib.machineused" -}}
-{{ $requests := ((((.Values.global).machines).ac1l1).requests) }}
-{{ $limits := ((((.Values.global).machines).ac1l1).limits) }}
+{{ $usedmachine := ($.Values.overlay).usedmachine }}
+{{ $requests := (((($.Values.global).machines).ac1l1).requests) }}
+{{ $limits := (((($.Values.global).machines).ac1l1).limits) }}
 
-{{- range $machines := (.Values.global).machines }}
+{{- range $machine := ($.Values.global).machines }}
 ---
-{{- if $machines (.Values.overlay).usedmachine }}
+{{- if $machine }}
 resources: 
   requests:
     cpu: {{ $requests.cpu }}
