@@ -1,7 +1,7 @@
 {{- define "helmlib.machineused" -}}
-{{ $usedmachine := ($.Values.overlay).usedmachine }}
-{{ $requests := (((($.Values.global).machines).ac1l1).requests) }}
-{{ $limits := (((($.Values.global).machines).ac1l1).limits) }}
+{{ $usedmachine := (.Values.overlay).usedmachine }}
+{{ $requests := ((((.Values.global).machines).ac1l1).requests) }}
+{{ $limits := ((((.Values.global).machines).ac1l1).limits) }}
 
 {{/* {{- range $machine := ($.Values.global).machines }} */}}
 {{/* --- */}}
