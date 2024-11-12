@@ -1,23 +1,15 @@
 {{- define "helmlib.machineused" -}}
-resources:
+{{- range $machines := .Values.global.machine }}
+---
+{{- if $machines .Values.overlay.usedmachine }}
+resources: 
   requests:
-    cpu: {{ .reqcpu }}
-    memory: {{ .reqmem }}
+    cpu: {{ .Values.global.machines.ac1l1.requests.cpu }}
+    memory: {{ .Values.global.machines.ac1l1.requests.memory }}
   limits:
-    cpu: {{ .limitcpu }}
-    memory: {{ .limitmem }}
-{{- end }}
-
-{{- define "helmlib.machineused.logic" -}}
+    cpu: {{ .Values.global.machines.ac1l1.limits.cpu }}
+    memory: {{ .Values.global.machines.ac1l1.limits.memory }}
 {{- end -}}
-
-{{ define "this"}}
-{{ $inputmachineused := .machineused }}
-{{ $limitmem := printf ".Values.global.resources.memorycap.%s" $inputmachineused }}
-{{ $limitcpu := mul $limitmem $inputmachineused }}
-{{ $reqcpu := mul $limitcpu .reqtolimit }}
-{{ $reqmem := mul $limitmem .reqtolimit}}
-{{ include "helmlib.machineused" (dict "reqcpu" $reqcpu "reqmem" $reqmem "limitcpu" $limitcpu "limitmem" $limitmem) }}
-{{ end }}
-
-
+---
+{{- end -}}
+{{- end -}}
