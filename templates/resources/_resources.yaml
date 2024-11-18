@@ -1,9 +1,9 @@
 {{- define "helmlib.engineused" -}}
 {{ $usedengine := (.Values.overlay).usedengine }}
-{{ $requests := ((((.Values.root).engines).ac1l1).requests) }}
-{{ $limits := ((((.Values.root).engines).ac1l1).limits) }}
+{{ $requests := printf "((%s.%s).requests)" ((.Values.root).engines) $usedengine }}
+{{ $limits := printf "((%s.%s).limits)" ((.Values.root).engines) $usedengine }}
 
-{{/* {{- range $engine := ($.Values.global).engines }} */}}
+{{/* {{- range $engine := ($.Values.root).engines }} */}}
 {{/* --- */}}
 {{/* {{- if $engine }} */}}
 resources: 
