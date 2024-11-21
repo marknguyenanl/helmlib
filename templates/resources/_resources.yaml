@@ -1,23 +1,10 @@
 {{- define "helmlib.engineused" -}}
-{{ $usedengine := (.Values.overlay).usedengine }}
-{{ $remapengine := printf "{{ .Values.root.engines.%s }}" $usedengine | fromYaml }}
-{{/* {{ $engine := get $.Values.root.engines $usedengine }} */}}
-{{/* {{- if $engine }} */}}
-
-{{/* {{- range $engine := ($.Values.root).engines }} */}}
-{{/* --- */}}
-{{/* {{- if $engine }} */}}
-{{/* {{- with $remapengine }} */}}
+{{- $usedengine := .Values.overlay.usedengine -}}
+{{- with (.Values.root).engines }}
+{{/* {{- $remapengine := printf ".%s" $usedengine -}} */}}
+{{- $requestscpu := tpl (printf "{{ (.%s.requests).cpu }}" $usedengine) . -}}
 resources: 
-{{- toYaml $remapengine | nindent 2 }}
-{{/* {{- with (.Values.root).engines }} */}}
-  {{/* requests: */}}
-    {{/* cpu: {{ ($usedengine.requests).cpu }} */}}
-    {{/* cpu: $usedengine */}}
-    {{/* memory: {{ ($usedengine.requests).memory }} */}}
-  {{/* limits: */}}
-  {{/*   cpu: {{ ($usedengine.limits).cpu }} */}}
-  {{/*   memory: {{ ($usedengine.limits).memory }} */}}
-{{/* --- */}}
-{{/* {{- end -}} */}}
+  requests:
+    cpu: {{ $requestscpu }}
+{{- end -}}
 {{- end -}}
