@@ -4,13 +4,13 @@
 {{- range $engine, $value := ((.Values.root).engines) }}
 ---
 {{- if eq $engine $usedengine -}}
-resources: 
+resources:
   requests:
-    cpu: {{ $value.requests.cpu }}
-    memory: {{ $value.requests.memory }}
+    cpu: {{ $engine.requests.cpu }}
+    memory: {{ $engine.requests.memory }}
   limits:
-    cpu: {{ $value.limits.cpu }}
-    memory: {{ $value.limits.memory }}
+    cpu: {{ $engine.limits.cpu }}
+    memory: {{ $engine.limits.memory }}
 {{- end -}}
 {{- end -}}
 {{- end -}}
