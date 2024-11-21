@@ -21,7 +21,7 @@ limits:
 {{/* {{- end -}} */}}
 
 {{- define "helmlib.engine.resources" -}}
-resources: {{ include "helmlib.engine.requests" . }}
+{{ include "helmlib.engine.requests" . }}
 {{/* {{- include "helmlib.engine.limits" . | nindent 2 -}} */}}
 {{- end -}}
 
