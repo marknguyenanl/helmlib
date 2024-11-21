@@ -1,9 +1,15 @@
 {{- define "helmlib.engine.requests" -}}
 {{- $usedengine := .Values.overlay.usedengine -}}
 {{- $requestcpu := .Values.root.engineRequests.cpu -}}
+{{- $requestmem := .Values.root.engineRequests.memory -}}
+{{- $limitcpu := .Values.root.engineLimits.cpu -}}
+{{- $limitmem := .Values.root.engineLimits.memory -}}
 requests:
   cpu: {{ pluck $usedengine $requestcpu | first | default $requestcpu._default }}
-  {{/* memory: {{ pluck $usedengine $engineRequests | first | default $engineRequests.memory._default }} */}}
+  memory: {{ pluck $usedengine $requestmem | first | default $requestmem._default }}
+limits:
+  cpu: {{ pluck $usedengine $limitcpu | first | default $limitcpu._default }}
+  memory: {{ pluck $usedengine $limitmem | first | default $limitmem._default }}
 {{- end -}}
 
 {{/* {{- define "helmlib.engine.limits" -}} */}}
@@ -15,8 +21,7 @@ requests:
 {{/* {{- end -}} */}}
 
 {{- define "helmlib.engine.resources" -}}
-resources:
-{{- include "helmlib.engine.requests" . | indent 2 -}}
+resources: {{ include "helmlib.engine.requests" . }}
 {{/* {{- include "helmlib.engine.limits" . | nindent 2 -}} */}}
 {{- end -}}
 
