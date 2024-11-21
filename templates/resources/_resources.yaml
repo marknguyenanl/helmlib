@@ -1,22 +1,19 @@
 {{- define "helmlib.engineused" -}}
 {{ $usedengine := (.Values.overlay).usedengine }}
+
 {{/* {{- range $engine := ($.Values.root).engines }} */}}
 {{/* --- */}}
 {{/* {{- if $engine }} */}}
 resources: 
-{{- with .Values.root.engines }}
+{{- with (.Values.root).engines }}
 {{ $requests :=  printf ".%+v.requests" $usedengine}}
 {{ $limits :=  printf ".%+v.limits" $usedengine }}
-{{- with $requests}}
   requests:
-    cpu: {{ .cpu }}
-    memory: {{ .memory }}
-{{- end -}}
-{{- with $limits}}
+    cpu: {{ $requests.cpu }}
+    memory: {{ $requests.memory }}
   limits:
-    cpu: {{ .cpu }}
-    memory: {{ .memory }}
-{{- end -}}
+    cpu: {{ $limits.cpu }}
+    memory: {{ $limits.memory }}
 {{/* --- */}}
 {{/* {{- end -}} */}}
 {{- end -}}
