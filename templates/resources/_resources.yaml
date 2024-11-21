@@ -6,7 +6,7 @@
 {{- if eq $engine $usedengine -}}
 resources:
   requests:
-    cpu: {{ printf "%s.requests.cpu" $engine }}
+    cpu: {{ printf "%s%+v%+v" $engine .requests .cpu }}
   {{/*   memory: {{ $engine.requests.memory }} */}}
   {{/* limits: */}}
   {{/*   cpu: {{ $engine.limits.cpu }} */}}
