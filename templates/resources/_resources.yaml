@@ -1,10 +1,16 @@
 {{- define "helmlib.engineused" -}}
 {{- $usedengine := .Values.overlay.usedengine -}}
-{{- with (.Values.root).engines }}
 {{/* {{- $remapengine := printf ".%s" $usedengine -}} */}}
-{{- $requestscpu := tpl (printf "{{ (.%s.requests).cpu }}" $usedengine) . -}}
+{{- range $engine, $value := .Values.root.engines }}
+---
+{{- if eq $engine $usedengine -}}
 resources: 
   requests:
-    cpu: {{ $requestscpu }}
+    cpu: {{ $engine.requests.cpu }}
+    memory: {{ $engine.requests.memory }}
+  limits:
+    cpu: {{ $engine.limits.cpu }}
+    memory: {{ $engine.limits.memory }}
+{{- end -}}
 {{- end -}}
 {{- end -}}
